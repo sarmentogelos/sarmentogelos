@@ -33,7 +33,7 @@ body {
 .menu {
     list-style: none;
     display: flex;
-    padding-right: 5px;
+    padding-right: 17px;
 }
 
 .menu li {
