@@ -4,58 +4,86 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sarmento Gelos</title>
-    <link rel="stylesheet" href="bografia.css">
+    <link rel="stylesheet" href="novo-estilo.css">
+    <link rel="icon" href="Sarmento.icone.png" type="image/png">
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header class="header">
-        <div class="logo">
-            <img src="S (3).png" alt="Gota de Cristal Ice Logo">
+    <header class="hero">
+        <div class="hero-banner">
+            <img src="bannercorreto.jpg" alt="Banner Sarmento Gelos">
         </div>
-        <nav>
-            <ul class="menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="mailto:sarmentogelos@gmail.com?subject=Olá&body=Escreva sua mensagem aqui">Seja um revendedor</a></li>
-                <li><a href="historia.html">Quem somos</a></li>
-                <li><a href="contato.html">Contato</a></li>
-            </ul>
-        </nav>
     </header>
 
-    <!-- Seção Produtos -->
-    <main>
-        <section class="products">
-            <h2>Sabores</h2>
-            <div class="product-grid">
-                <div class="product">
-                    <img src="cocoverde1.png" alt="Coco verde">
-                    <h3>Coco Verde</h3>
-                </div>
-                <div class="product">
-                    <img src="maçaverde.png" alt="gelo">
-                    <h3>Maça verde</h3>
-                </div>
-                <div class="product">
-                    <img src="maracuja.png" alt="Gelo">
-                    <h3>Maracuja</h3>
-                </div>
-                <div class="product">
-                    <img src="melancia1.png" alt="Gelo">
-                    <h3>Melancia</h3>
-                </div>
-                <div class="product">
-                    <img src="morango.png" alt="Gelo">
-                    <h3>Morango</h3>
-                </div>
-            </div>
-        </section>
-    </main>
+    <a href="https://api.whatsapp.com/message/II34LAN75FIPG1?autoload=1&app_absent=0" class="whatsapp-floating">
+        <img src="png-transparent-computer-icons-whatsapp-whatsapp-text-logo-silhouette-thumbnail.png" alt="WhatsApp">
+    </a>
 
-    <!-- Rodapé -->
-    <footer class="footer">
-        <p>&copy; 2024 Sarmento Gelos. Todos os direitos reservados.</p>
-        <a href="https://api.whatsapp.com/message/II34LAN75FIPG1?autoload=1&app_absent=0" class="whatsapp-floating"><img src="wa.jpg" alt="WhatsApp"></a>
+    <section class="features">
+        <div class="feature">
+            <img src="Sarmento.icone.png" alt="Gelo 100% Natural">
+            <p>QUALIDADE NO SABOR</p>
+        </div>
+        <div class="feature">
+            <img src="Sarmento.iconesabores.png" alt="Sabores Exclusivos">
+            <p>Sabores Exclusivos</p>
+        </div>
+        <div class="feature">
+            <img src="Sarmento.iconeentrega.png" alt="Entrega Rápida e Segura">
+            <p>Entrega Rápida e Segura</p>
+        </div>
+        <div class="feature">
+            <img src="Sarmento.iconeduração.png" alt="Sustentabilidade na Produção">
+            <p>Gelo que dura mais</p>
+        </div>
+    </section>
+
+    <section class="products">
+        <h2>Fotos e Apresentação dos Produtos</h2>
+        <div class="product-gallery">
+            <img src="cocopacote.png" alt="Produto 1">
+            <img src="morangopacote.png" alt="Produto 2">
+            <img src="maracujapacote.png" alt="Produto 3">
+            <img src="maçaverdepacote.png" alt="Produto 4">
+            <img src="melanciapacote.png" alt="Produto 5">
+        </div>
+    </section>
+
+    <section class="cta-form">
+        <blockquote>
+            <p>"Os melhores gelos saborizados que já experimentei!"</p>
+        </blockquote>
+        <a href="https://api.whatsapp.com/send?phone=5511997743346&text=Nome:%0APedido:%0AEndereço:" target="_blank">
+            <button type="button">Peça Agora</button>
+        </a>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sarmento Gelos. Todos os direitos reservados.</p>
+        <img src="logo sarmento gelos.png" alt="Logo Sarmento Gelos" style="width: 150px; margin-top: 10px;">
     </footer>
 
+    <script>
+        function sendToWhatsApp(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+
+            // Obtém os valores dos campos do formulário
+            const name = document.getElementById('name').value.trim();
+            const order = document.getElementById('order').value.trim();
+            const address = document.getElementById('address').value.trim();
+
+            // Verifica se todos os campos estão preenchidos
+            if (!name || !order || !address) {
+                alert('Por favor, preencha todos os campos antes de enviar.');
+                return;
+            }
+
+            // Monta a mensagem para o WhatsApp
+            const message = `Nome: ${name}%0APedido: ${order}%0AEndereço: ${address}`;
+
+            // Redireciona para o WhatsApp com a mensagem
+            const whatsappURL = `https://api.whatsapp.com/send?phone=5511997743346&text=${message}`;
+            window.open(whatsappURL, '_blank'); // Abre o WhatsApp em uma nova aba
+        }
+    </script>
 </body>
 </html>
