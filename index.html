@@ -1,89 +1,558 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarmento Gelos</title>
-    <link rel="stylesheet" href="novo-estilo.css">
-    <link rel="icon" href="Sarmento.icone.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sarmento Gelos</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    /* Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #6b7280;
+      line-height: 1.6;
+      font-size: 17px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 2px;
+    }
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    header {
+      position: sticky;
+      top: 0;
+      background: #ffffff;
+      border-bottom: 1px solid #e5e7eb;
+      z-index: 100;
+      box-shadow: 0 2px 6px rgb(0 0 0 / 0.05);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.75rem;
+      color: #111827;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-logo img {
+      height: 92px;
+      width: auto;
+      border-radius: 0.5rem;
+      object-fit: contain;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      font-weight: 600;
+      font-size: 1rem;
+      color: #6b7280;
+    }
+    .nav-links a {
+      position: relative;
+      padding: 0.25rem 0;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: #111827;
+    }
+
+    /* Carousel Styles */
+    .hero {
+      background: #f9fafb;
+      padding: 5rem 0 4rem;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      position: relative;
+      overflow: visible;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 4.5rem;
+      line-height: 1.1;
+      max-width: 800px;
+      color: #111827;
+      margin: 0;
+      z-index: 10;
+      position: relative;
+      user-select: text;
+    }
+    .hero p {
+      font-size: 2.10rem;
+      max-width: 600px;
+      color: #374151;
+      margin: 0 0 1.5rem 0;
+      z-index: 10;    
+      position: relative;
+      user-select: text;
+    }
+    /* Carousel container */
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      user-select: none;
+    }
+    .carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      pointer-events: none;
+      border-radius: 0.75rem;
+    }
+    .carousel img.active {
+      opacity: 1;
+      pointer-events: auto;
+      position: relative;
+    }
+    /* Carousel nav dots */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 1.5rem;
+      z-index: 20;
+      position: relative;
+    }
+    .carousel-dots button {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: none;
+      background-color: #d1d5db;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      padding: 0;
+      user-select: none;
+    }
+    .carousel-dots button.active,
+    .carousel-dots button:hover,
+    .carousel-dots button:focus {
+      background-color: #2563eb;
+      outline: none;
+    }
+
+    .cta-button {
+      background-color: #111827;
+      color: #ffffff;
+      padding: 1rem 2.5rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 12px rgb(17 24 39 / 0.3);
+      margin-top: 1.5rem;
+      user-select: none;
+      z-index: 10;
+      position: relative;
+      align-self: center;
+    }
+    .cta-button:hover,
+    .cta-button:focus {
+      background-color: #2563eb;
+      outline: none;
+      box-shadow: 0 6px 20px rgb(37 99 235 / 0.6);
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      padding: 4rem 0;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: #ffffff;
+      border-radius: 0.75rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+      cursor: default;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      user-select: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .feature-card:hover,
+    .feature-card:focus-within {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 26px rgb(0 0 0 / 0.12);
+      outline: none;
+    }
+    .feature-card img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      filter: grayscale(0.15);
+      transition: filter 0.3s ease;
+    }
+    .feature-card:hover img,
+    .feature-card:focus-within img {
+      filter: grayscale(0);
+    }
+    .feature-card p {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #374151;
+      margin: 0;
+      user-select: text;
+    }
+
+    /* Products */
+    .products {
+      max-width: 1000px;
+      margin: 0 auto 5rem;
+      padding: 0 1.5rem;
+    }
+    .products h2 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      color: #111827;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    .product-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      justify-items: center;
+    }
+    .product-gallery img {
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 18px rgb(0 0 0 / 0.06);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+      max-width: 100%;
+      height: 180px;
+      object-fit: cover;
+      user-select: none;
+    }
+    .product-gallery img:hover,
+    .product-gallery img:focus {
+      box-shadow: 0 10px 26px rgb(0 0 0 / 0.14);
+      transform: scale(1.05);
+      outline: none;
+    }
+
+    /* CTA Form Section */
+    .cta-form {
+      max-width: 420px;
+      margin: 0 auto 5rem;
+      padding: 2.5rem;
+      background: #f9fafb;
+      border-radius: 0.75rem;
+      box-shadow: 0 5px 20px rgb(0 0 0 / 0.07);
+      text-align: center;
+      user-select: none;
+    }
+    .cta-form blockquote {
+      font-style: italic;
+      font-weight: 600;
+      font-size: 1.125rem;
+      margin-bottom: 2rem;
+      color: #4b5563;
+    }
+    .cta-form a button {
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 1rem 0;
+      border: none;
+      border-radius: 0.75rem;
+      background-color: #111827;
+      color: #ffffff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      box-shadow: 0 4px 12px rgb(17 24 39 / 0.3);
+    }
+    .cta-form a button:hover,
+    .cta-form a button:focus {
+      background-color: #2563eb;
+      outline: none;
+      box-shadow: 0 6px 20px rgb(37 99 235 / 0.6);
+    }
+
+    /* Footer */
+    footer {
+      background-color: #111827;
+      color: #9ca3af;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-weight: 500;
+      font-size: 0.875rem;
+      user-select: none;
+    }
+    footer img {
+      margin-top: 0.75rem;
+      width: 130px;
+      border-radius: 0.5rem;
+      filter: brightness(0.85);
+      user-select: none;
+    }
+
+    /* WhatsApp Floating Icon */
+    .whatsapp-floating {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1500;
+      border-radius: 50%;
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.4);
+      transition: transform 0.3s ease;
+      user-select: none;
+      background: white;
+    }
+    .whatsapp-floating img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      cursor: pointer;
+      filter: drop-shadow(0 0 0.2rem rgba(0,0,0,0.05));
+      user-select: none;
+    }
+    .whatsapp-floating:hover,
+    .whatsapp-floating:focus {
+      transform: scale(1.1);
+      outline: none;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.7);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.25rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      nav {
+        padding: 0 1rem;
+      }
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+      .features {
+        grid-template-columns: 1fr;
+        padding: 3rem 0;
+      }
+      .product-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 1.25rem;
+      }
+      .product-gallery img {
+        height: 140px;
+      }
+      .cta-form {
+        max-width: 90vw;
+        padding: 2rem 1rem;
+        margin: 3rem auto 4rem;
+      }
+      footer {
+        font-size: 0.75rem;
+        padding: 2rem 1rem;
+      }
+      .whatsapp-floating {
+        bottom: 1rem;
+        right: 1rem;
+        transform: scale(0.9);
+      }
+    }
+  </style>
 </head>
 <body>
-    <header class="hero">
-        <div class="hero-banner">
-            <img src="bannercorreto.jpg" alt="Banner Sarmento Gelos">
-        </div>
-    </header>
+  <header>
+    <nav class="container" aria-label="Navegação principal">
+      <a href="#" class="nav-logo" aria-label="Sarmento Gelos homepage">
+        <img src="logo sarmento gelos.png" alt="Logo Sarmento Gelos" loading="lazy" />
+        
+      </a>
+      <div class="nav-links" role="navigation" aria-label="Menu Principal">
+        <a href="#features" tabindex="0">Diferenciais</a>
+        <a href="#products" tabindex="0">Produtos</a>
+        <a href="#cta" tabindex="0">Peça Agora</a>
+      </div>
+    </nav>
+  </header>
 
-    <a href="https://api.whatsapp.com/message/II34LAN75FIPG1?autoload=1&app_absent=0" class="whatsapp-floating">
-        <img src="png-transparent-computer-icons-whatsapp-whatsapp-text-logo-silhouette-thumbnail.png" alt="WhatsApp">
-    </a>
+  <main>
+    <section class="hero container" role="banner" aria-label="Seção principal">
+      <h1>Sarmento Gelos</h1>
+      <p>Mais Que um Sabor uma Experiência</p>
 
-    <section class="features">
-        <div class="feature">
-            <img src="Sarmento.icone.png" alt="Gelo 100% Natural">
-            <p>QUALIDADE NO SABOR</p>
-        </div>
-        <div class="feature">
-            <img src="Sarmento.iconesabores.png" alt="Sabores Exclusivos">
-            <p>Sabores Exclusivos</p>
-        </div>
-        <div class="feature">
-            <img src="Sarmento.iconeentrega.png" alt="Entrega Rápida e Segura">
-            <p>Entrega Rápida e Segura</p>
-        </div>
-        <div class="feature">
-            <img src="Sarmento.iconeduração.png" alt="Sustentabilidade na Produção">
-            <p>Gelo que dura mais</p>
-        </div>
+      <!-- Carousel -->
+      <div class="carousel" aria-roledescription="carousel" aria-label="Galeria de banners">
+        <img src="banner novo.jpg" alt="Banner principal dos Gelos Sarmento" class="active" />
+        <img src="banner novo1.jpg" alt="Banner com gelos saborizados" />
+        <img src="banner novo2.jpg" alt="Banner com entrega rápida Sarmento" />
+      </div>
+      <div class="carousel-dots" role="tablist" aria-label="Navegação dos banners">
+        <button type="button" aria-label="Banner 1" aria-selected="true" role="tab" tabindex="0"></button>
+        <button type="button" aria-label="Banner 2" aria-selected="false" role="tab" tabindex="-1"></button>
+        <button type="button" aria-label="Banner 3" aria-selected="false" role="tab" tabindex="-1"></button>
+      </div>
+
+      <a href="https://api.whatsapp.com/send?phone=5511997743346&text=Olá,%20gostaria%20de%20fazer%20um%20pedido" target="_blank" rel="noopener" class="cta-button" role="button">Peça Agora</a>
     </section>
 
-    <section class="products">
-        <h2>Fotos e Apresentação dos Produtos</h2>
-        <div class="product-gallery">
-            <img src="cocopacote.png" alt="Produto 1">
-            <img src="morangopacote.png" alt="Produto 2">
-            <img src="maracujapacote.png" alt="Produto 3">
-            <img src="maçaverdepacote.png" alt="Produto 4">
-            <img src="melanciapacote.png" alt="Produto 5">
-        </div>
+    <section id="features" class="features" aria-label="Diferenciais da empresa">
+      <article class="feature-card" tabindex="0" role="region" aria-labelledby="feature1-title">
+        <img src="Sarmento.icone.png" alt="" aria-hidden="true" />
+        <p id="feature1-title">Qualidade no sabor</p>
+      </article>
+      <article class="feature-card" tabindex="0" role="region" aria-labelledby="feature2-title">
+        <img src="logo embalagem.jpg" alt="" aria-hidden="true" />
+        <p id="feature2-title">Embalagem Práticas</p>
+      </article>
+      <article class="feature-card" tabindex="0" role="region" aria-labelledby="feature3-title">
+        <img src="Sarmento.iconeentrega.png" alt="" aria-hidden="true" />
+        <p id="feature3-title">Entrega rápida e segura</p>
+      </article>
+      <article class="feature-card" tabindex="0" role="region" aria-labelledby="feature4-title">
+        <img src="Sarmento.iconeduração.png" alt="" aria-hidden="true" />
+        <p id="feature4-title">Gelo que dura mais</p>
+      </article>
     </section>
 
-    <section class="cta-form">
-        <blockquote>
-            <p>"Os melhores gelos saborizados que já experimentei!"</p>
-        </blockquote>
-        <a href="https://api.whatsapp.com/send?phone=5511997743346&text=Nome:%0APedido:%0AEndereço:" target="_blank">
-            <button type="button">Peça Agora</button>
-        </a>
+    <section id="products" class="products" aria-label="Galeria de produtos">
+      <h2>Fotos e Apresentação dos Produtos</h2>
+      <div class="product-gallery" role="list">
+        <img role="listitem" src="embalagem agua de coco.jpg" alt="Pacote de gelo sabor coco" loading="lazy" />
+        <img role="listitem" src="embalagem morango.jpg" alt="Pacote de gelo sabor morango" loading="lazy" />
+        <img role="listitem" src="embalagem maracuja.jpg" alt="Pacote de gelo sabor maracujá" loading="lazy" />
+        <img role="listitem" src="embalagem maça verde.jpg" alt="Pacote de gelo sabor maçã verde" loading="lazy" />
+        <img role="listitem" src="embalagem melancia.jpg" alt="Pacote de gelo sabor melancia" loading="lazy" />
+      </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Sarmento Gelos. Todos os direitos reservados.</p>
-        <img src="logo sarmento gelos.png" alt="Logo Sarmento Gelos" style="width: 150px; margin-top: 10px;">
-    </footer>
+    <section id="cta" class="cta-form" aria-label="Chamada para ação - Faça o pedido">
+      <blockquote>"Os melhores gelos saborizados que já experimentei!"</blockquote>
+      <a href="https://api.whatsapp.com/send?phone=5511997743346&text=Nome:%0APedido:%0AEndereço:" target="_blank" rel="noopener">
+        <button type="button">Peça Agora</button>
+      </a>
+    </section>
+  </main>
 
-    <script>
-        function sendToWhatsApp(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
+  <footer>
+    <p>© 2025 Sarmento Gelos. Todos os direitos reservados.</p>
+    <img src="logo sarmento gelos.png" alt="Logo Sarmento Gelos" loading="lazy" />
+  </footer>
 
-            // Obtém os valores dos campos do formulário
-            const name = document.getElementById('name').value.trim();
-            const order = document.getElementById('order').value.trim();
-            const address = document.getElementById('address').value.trim();
+  <a
+    href="https://api.whatsapp.com/message/II34LAN75FIPG1?autoload=1&amp;app_absent=0"
+    class="whatsapp-floating"
+    aria-label="Abrir WhatsApp para contato com Sarmento Gelos"
+  >
+    <img src="png-transparent-computer-icons-whatsapp-whatsapp-text-logo-silhouette-thumbnail.png" alt="Ícone WhatsApp" />
+  </a>
 
-            // Verifica se todos os campos estão preenchidos
-            if (!name || !order || !address) {
-                alert('Por favor, preencha todos os campos antes de enviar.');
-                return;
-            }
+  <script>
+    (() => {
+      const slides = document.querySelectorAll('.carousel img');
+      const dots = document.querySelectorAll('.carousel-dots button');
+      let current = 0;
+      let timer = null;
 
-            // Monta a mensagem para o WhatsApp
-            const message = `Nome: ${name}%0APedido: ${order}%0AEndereço: ${address}`;
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+          dots[i].classList.toggle('active', i === index);
+          dots[i].setAttribute('aria-selected', i === index ? 'true' : 'false');
+          dots[i].tabIndex = i === index ? 0 : -1;
+        });
+        current = index;
+      }
 
-            // Redireciona para o WhatsApp com a mensagem
-            const whatsappURL = `https://api.whatsapp.com/send?phone=5511997743346&text=${message}`;
-            window.open(whatsappURL, '_blank'); // Abre o WhatsApp em uma nova aba
-        }
-    </script>
+      function nextSlide() {
+        let nextIndex = (current + 1) % slides.length;
+        showSlide(nextIndex);
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          showSlide(i);
+          resetTimer();
+        });
+        dot.addEventListener('keydown', e => {
+          if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            let prev = (i - 1 + dots.length) % dots.length;
+            dots[prev].focus();
+          }
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            let next = (i + 1) % dots.length;
+            dots[next].focus();
+          }
+        });
+      });
+
+      function resetTimer() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(nextSlide, 4500);
+      }
+
+      // Initialize
+      showSlide(0);
+      resetTimer();
+    })();
+  </script>
 </body>
 </html>
